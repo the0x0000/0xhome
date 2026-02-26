@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="logo.svg" class="logo-img">
+            </div>
+        </header>
+
+        <main>
+            <div class="terminal">
+                <div class="terminal-header">
+                    <span class="terminal-title">./verify_access.py</span>
+                </div>
+                <div class="terminal-body">
+                    <p class="prompt">$ Листовка верифицирована. Чтобы получить доступ, реши задачу.</p>
+                    
+                    <div class="code-block" id="codeBlock"></div>
+
+                    <div class="input-group">
+                        <span class="prompt">> Ответ (число):</span>
+                        <input type="number" id="answerInput" autocomplete="off" autofocus>
+                        <button id="submitBtn">[ Проверить ]</button>
+                    </div>
+
+                    <p id="errorMsg" class="hidden">Неверно. Страница будет перезагружена.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>[root@localhost] $</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доступ получен</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="logo.svg" class="logo-img">
+            </div>
+        </header>
+
+        <main>
+            <div class="terminal" >
+                <div class="terminal-header">
+                    <span class="terminal-title">./identity_assigned.py</span>
+                </div>
+                <div class="terminal-body">
+                    <p class="prompt">$ Доступ получен.</p>
+                    <p class="prompt">> Перейди в Telegram-бота для собеседования:</p>
+                    <p class="prompt">> whle ni zo ninu dœod</p>
+                    
+                    <div class="action-buttons">
+                        <button onclick="closeSite()" class="action-btn">
+                            [ Выйти ]
+                        </button>
+                        <button onclick="openTelegram()" class="action-btn">
+                            [ Открыть Telegram ]
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>[root@localhost] $</p>
+        </footer>
+    </div>
+
+    <script>
+        function closeSite(){
+            window.location.href = 'about:blank';
+        }
+        
+        function openTelegram() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refHex = urlParams.get('ref') || 'none';
+            const telegramUrl = `https://t.me/omen_main_bot?start=${refHex}`;
+            window.open(telegramUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
