@@ -39,14 +39,14 @@
             <p>[root@localhost] $</p>
         </footer>
     </div>
-    <script>
+<script>
         let generatedKey = "";
         function generateOmenKey() {
             const nums = "0123456789";
             const alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             const urlParams = new URLSearchParams(window.location.search);
             let refHex = urlParams.get('ref') || '0000';
-            refHex = refHex.toUpperCase().padEnd(4, '0').slice(0, 4);
+            refHex = refHex.replace(/^0x/i, '').toUpperCase().padEnd(4, '0').slice(0, 4);
             let maskedRef = "";
             for (let i = 0; i < refHex.length; i++) {
                 let index = alphabet.indexOf(refHex[i]);
@@ -90,6 +90,6 @@
             const telegramUrl = `https://t.me/omen_main_bot?start=${generatedKey}`;
             window.open(telegramUrl, '_blank');
         }
-    </script>
+</script>
 </body>
 </html>
