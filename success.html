@@ -17,43 +17,77 @@
                 <img src="img/logo.svg" class="logo-img">
             </div>
         </header>
-
         <main>
-            <div class="terminal" >
+            <div class="terminal">
                 <div class="terminal-header">
                     <span class="terminal-title">./identity_assigned.py</span>
                 </div>
                 <div class="terminal-body">
-                    <p class="prompt">$ Доступ получен.</p>
-                    <p class="prompt">> Перейди в Telegram-бота для собеседования:</p>
-                    <p class="prompt">> whle ni zo ninu dœod</p>
-                    
+                    <p class="prompt">[SYS] Access allowed</p>
+                    <p class="prompt">[SYS] Перейдите в Telegram-бота</p>
+                    <p class="prompt">> Ваш payload-ключ: 
+                        <button onclick="copyKeyToClipboard()" id="key-display" style="background: none; border: 1px dashed #ff0055; color: #ff0055; font-family: monospace; font-size: 1.1em; padding: 2px 8px; cursor: pointer; font-weight: bold; letter-spacing: 1px;">Генерация...</button>
+                    </p>
                     <div class="action-buttons">
-                        <button onclick="closeSite()" class="action-btn">
-                             Выйти 
-                        </button>
-                        <button onclick="openTelegram()" class="action-btn">
-                             Открыть Telegram 
-                        </button>
+                        <button onclick="closeSite()" class="action-btn">Выйти</button>
+                        <button onclick="openTelegram()" class="action-btn">Открыть Telegram</button>
                     </div>
                 </div>
             </div>
         </main>
-
         <footer>
             <p>[root@localhost] $</p>
         </footer>
     </div>
-
     <script>
+        let generatedKey = "";
+        function generateOmenKey() {
+            const nums = "0123456789";
+            const alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const urlParams = new URLSearchParams(window.location.search);
+            let refHex = urlParams.get('ref') || '0000';
+            refHex = refHex.toUpperCase().padEnd(4, '0').slice(0, 4);
+            let maskedRef = "";
+            for (let i = 0; i < refHex.length; i++) {
+                let index = alphabet.indexOf(refHex[i]);
+                if (index !== -1) {
+                    maskedRef += alphabet[(index + 3) % alphabet.length];
+                } else {
+                    maskedRef += refHex[i];
+                }
+            }
+            let xxxx = Array.from({length: 4}, () => nums[Math.floor(Math.random() * nums.length)]).join('');
+            let rawString = maskedRef + xxxx;
+            let sum = 0;
+            for (let i = 0; i < rawString.length; i++) {
+                sum += rawString.charCodeAt(i);
+            }
+            let zzzz = (sum * 17).toString(16).toUpperCase().padStart(4, '0').slice(-4);
+            return `OMEN-${maskedRef}-${xxxx}-${zzzz}`;
+        }
+        window.onload = function() {
+            generatedKey = generateOmenKey();
+            document.getElementById("key-display").innerText = generatedKey;
+        };
+        function copyKeyToClipboard() {
+            navigator.clipboard.writeText(generatedKey).then(() => {
+                const keyBtn = document.getElementById("key-display");
+                keyBtn.innerText = "[ СКОПИРОВАНО ]";
+                keyBtn.style.color = "#00ff66";
+                keyBtn.style.borderColor = "#00ff66";
+                setTimeout(() => {
+                    keyBtn.innerText = generatedKey;
+                    keyBtn.style.color = "#ff0055";
+                    keyBtn.style.borderColor = "#ff0055";
+                }, 1000);
+            }).catch(err => console.log('Ошибка копирования', err));
+        }
         function closeSite(){
             window.location.href = 'about:blank';
         }
-        
         function openTelegram() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const refHex = urlParams.get('ref') || 'none';
-            const telegramUrl = `https://t.me/omen_main_bot?start=${refHex}`;
+            navigator.clipboard.writeText(generatedKey).catch(err => console.log('Ошибка', err));
+            const telegramUrl = `https://t.me/omen_main_bot?start=${generatedKey}`;
             window.open(telegramUrl, '_blank');
         }
     </script>
