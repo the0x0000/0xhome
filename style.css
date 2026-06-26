@@ -23,6 +23,7 @@ body {
     padding: 30px;
     background-color: #111;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.05);
+    border-radius: 6px; /* Аккуратное скругление главного контейнера */
 }
 
 header {
@@ -33,10 +34,17 @@ header {
 }
 
 .logo {
+    text-align: center;
+    margin-bottom: 15px;
     font-size: 2.5rem;
     font-weight: 700;
     letter-spacing: 3px;
-    margin-bottom: 10px;
+}
+
+.logo-img {
+    height: 150px; 
+    width: auto;
+    filter: drop-shadow(0 0 8px rgba(0, 168, 255, 0.5));
 }
 
 .tagline {
@@ -49,6 +57,8 @@ header {
     border: 1px solid #333;
     background-color: #000;
     margin-bottom: 30px;
+    border-radius: 6px; /* Скругление углов терминала */
+    overflow: hidden;   /* Важно: обрезает фоны шапки внутри скруглённых углов */
 }
 
 .terminal-header {
@@ -64,6 +74,7 @@ header {
 
 .terminal-body {
     padding: 25px;
+    position: relative;
     min-height: 300px;
 }
 
@@ -81,6 +92,7 @@ header {
     white-space: pre;
     overflow-x: auto;
     color: #f8f8f8;
+    border-radius: 0 4px 4px 0; /* Мягкое скругление правой части блока кода */
 }
 
 .input-group {
@@ -100,6 +112,7 @@ header {
     font-size: 1rem;
     flex-grow: 1;
     max-width: 200px;
+    border-radius: 4px; /* Скругление поля ввода */
 }
 
 #answerInput:focus {
@@ -115,6 +128,7 @@ button {
     font-family: 'JetBrains Mono', monospace;
     cursor: pointer;
     transition: all 0.2s;
+    border-radius: 4px; /* Скругление кнопок */
 }
 
 button:hover {
@@ -139,24 +153,6 @@ footer {
     margin-top: 30px;
     border-top: 1px solid #333;
     padding-top: 20px;
-}
-/* Стили для логотипа */
-.logo {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.logo-img {
-    height: 150px; 
-    width: auto;
-    filter: drop-shadow(0 0 8px rgba(0, 168, 255, 0.5));
-}
-
-
-.terminal-body {
-    position: relative;
-    min-height: 300px;
-    padding: 25px;
 }
 
 .action-buttons {
